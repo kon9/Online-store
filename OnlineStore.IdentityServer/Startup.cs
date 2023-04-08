@@ -2,7 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System.Linq;
+using System.Reflection;
 using IdentityServer4;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,26 +14,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.EntityFramework.Mappers;
-using System.Linq;
-using System.Reflection;
-using OnlineStore.Library.UserManagementService.Models;
-using OnlineStore.Library.Data;
 using OnlineStore.Library.Constants;
+using OnlineStore.Library.Data;
+using OnlineStore.Library.UserManagementService.Models;
 
 namespace OnlineStore
 {
     public class Startup
     {
-        public IWebHostEnvironment Environment { get; }
-        public IConfiguration Configuration { get; }
-
         public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
             Environment = environment;
             Configuration = configuration;
         }
+
+        public IWebHostEnvironment Environment { get; }
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -66,7 +66,7 @@ namespace OnlineStore
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    
+
                     // register your IdentityServer with Google at https://console.developers.google.com
                     // enable the Google+ API
                     // set the redirect URI to https://localhost:5001/signin-google
@@ -79,21 +79,17 @@ namespace OnlineStore
         {
             InitializeDatabase(app);
             if (Environment.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
-            }
+            //app.UseDatabaseErrorPage();
 
             app.UseStaticFiles();
 
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
         }
+
         private void InitializeDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
@@ -104,28 +100,20 @@ namespace OnlineStore
                 context.Database.Migrate();
                 if (!context.Clients.Any())
                 {
-                    foreach (var client in Config.Clients)
-                    {
-                        context.Clients.Add(client.ToEntity());
-                    }
+                    foreach (var client in Config.Clients) context.Clients.Add(client.ToEntity());
                     context.SaveChanges();
                 }
 
                 if (!context.IdentityResources.Any())
                 {
                     foreach (var resource in Config.IdentityResources)
-                    {
                         context.IdentityResources.Add(resource.ToEntity());
-                    }
                     context.SaveChanges();
                 }
 
                 if (!context.ApiScopes.Any())
                 {
-                    foreach (var resource in Config.ApiScopes)
-                    {
-                        context.ApiScopes.Add(resource.ToEntity());
-                    }
+                    foreach (var resource in Config.ApiScopes) context.ApiScopes.Add(resource.ToEntity());
                     context.SaveChanges();
                 }
             }

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Library.Constants;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineStore.UserManagementService.Controllers
 {
@@ -14,6 +14,7 @@ namespace OnlineStore.UserManagementService.Controllers
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
+
         public RolesController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
@@ -31,7 +32,7 @@ namespace OnlineStore.UserManagementService.Controllers
         {
             var roleToBeUpdated = await _roleManager.FindByIdAsync(role.Id);
             if (roleToBeUpdated == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"Role {role.Name} was not found." });
+                return IdentityResult.Failed(new IdentityError { Description = $"Role {role.Name} was not found." });
 
             roleToBeUpdated.Name = role.Name;
 

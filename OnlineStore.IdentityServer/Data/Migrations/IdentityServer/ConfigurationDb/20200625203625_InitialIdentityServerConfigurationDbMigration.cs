@@ -8,8 +8,8 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ApiResources",
-                columns: table => new
+                "ApiResources",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -24,14 +24,11 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                     LastAccessed = table.Column<DateTime>(nullable: true),
                     NonEditable = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApiResources", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_ApiResources", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "ApiScopes",
-                columns: table => new
+                "ApiScopes",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -43,14 +40,11 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                     Emphasize = table.Column<bool>(nullable: false),
                     ShowInDiscoveryDocument = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApiScopes", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_ApiScopes", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
+                "Clients",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -98,14 +92,11 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                     DeviceCodeLifetime = table.Column<int>(nullable: false),
                     NonEditable = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Clients", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "IdentityResources",
-                columns: table => new
+                "IdentityResources",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -120,14 +111,11 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                     Updated = table.Column<DateTime>(nullable: true),
                     NonEditable = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityResources", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_IdentityResources", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "ApiResourceClaims",
-                columns: table => new
+                "ApiResourceClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -138,16 +126,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ApiResourceClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiResourceClaims_ApiResources_ApiResourceId",
-                        column: x => x.ApiResourceId,
-                        principalTable: "ApiResources",
-                        principalColumn: "Id",
+                        "FK_ApiResourceClaims_ApiResources_ApiResourceId",
+                        x => x.ApiResourceId,
+                        "ApiResources",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApiResourceProperties",
-                columns: table => new
+                "ApiResourceProperties",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -159,16 +147,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ApiResourceProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiResourceProperties_ApiResources_ApiResourceId",
-                        column: x => x.ApiResourceId,
-                        principalTable: "ApiResources",
-                        principalColumn: "Id",
+                        "FK_ApiResourceProperties_ApiResources_ApiResourceId",
+                        x => x.ApiResourceId,
+                        "ApiResources",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApiResourceScopes",
-                columns: table => new
+                "ApiResourceScopes",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -179,16 +167,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ApiResourceScopes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiResourceScopes_ApiResources_ApiResourceId",
-                        column: x => x.ApiResourceId,
-                        principalTable: "ApiResources",
-                        principalColumn: "Id",
+                        "FK_ApiResourceScopes_ApiResources_ApiResourceId",
+                        x => x.ApiResourceId,
+                        "ApiResources",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApiResourceSecrets",
-                columns: table => new
+                "ApiResourceSecrets",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -203,16 +191,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ApiResourceSecrets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiResourceSecrets_ApiResources_ApiResourceId",
-                        column: x => x.ApiResourceId,
-                        principalTable: "ApiResources",
-                        principalColumn: "Id",
+                        "FK_ApiResourceSecrets_ApiResources_ApiResourceId",
+                        x => x.ApiResourceId,
+                        "ApiResources",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApiScopeClaims",
-                columns: table => new
+                "ApiScopeClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -223,16 +211,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ApiScopeClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiScopeClaims_ApiScopes_ScopeId",
-                        column: x => x.ScopeId,
-                        principalTable: "ApiScopes",
-                        principalColumn: "Id",
+                        "FK_ApiScopeClaims_ApiScopes_ScopeId",
+                        x => x.ScopeId,
+                        "ApiScopes",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApiScopeProperties",
-                columns: table => new
+                "ApiScopeProperties",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -244,16 +232,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ApiScopeProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiScopeProperties_ApiScopes_ScopeId",
-                        column: x => x.ScopeId,
-                        principalTable: "ApiScopes",
-                        principalColumn: "Id",
+                        "FK_ApiScopeProperties_ApiScopes_ScopeId",
+                        x => x.ScopeId,
+                        "ApiScopes",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientClaims",
-                columns: table => new
+                "ClientClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -265,16 +253,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientClaims_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientClaims_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientCorsOrigins",
-                columns: table => new
+                "ClientCorsOrigins",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -285,16 +273,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientCorsOrigins", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientCorsOrigins_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientCorsOrigins_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientGrantTypes",
-                columns: table => new
+                "ClientGrantTypes",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -305,16 +293,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientGrantTypes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientGrantTypes_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientGrantTypes_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientIdPRestrictions",
-                columns: table => new
+                "ClientIdPRestrictions",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -325,16 +313,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientIdPRestrictions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientIdPRestrictions_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientIdPRestrictions_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientPostLogoutRedirectUris",
-                columns: table => new
+                "ClientPostLogoutRedirectUris",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -345,16 +333,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientPostLogoutRedirectUris", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientPostLogoutRedirectUris_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientPostLogoutRedirectUris_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientProperties",
-                columns: table => new
+                "ClientProperties",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -366,16 +354,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientProperties_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientProperties_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientRedirectUris",
-                columns: table => new
+                "ClientRedirectUris",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -386,16 +374,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientRedirectUris", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientRedirectUris_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientRedirectUris_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientScopes",
-                columns: table => new
+                "ClientScopes",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -406,16 +394,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientScopes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientScopes_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientScopes_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientSecrets",
-                columns: table => new
+                "ClientSecrets",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -430,16 +418,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_ClientSecrets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientSecrets_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_ClientSecrets_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityResourceClaims",
-                columns: table => new
+                "IdentityResourceClaims",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -450,16 +438,16 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_IdentityResourceClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IdentityResourceClaims_IdentityResources_IdentityResourceId",
-                        column: x => x.IdentityResourceId,
-                        principalTable: "IdentityResources",
-                        principalColumn: "Id",
+                        "FK_IdentityResourceClaims_IdentityResources_IdentityResourceId",
+                        x => x.IdentityResourceId,
+                        "IdentityResources",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityResourceProperties",
-                columns: table => new
+                "IdentityResourceProperties",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -471,187 +459,187 @@ namespace OnlineStore.IdentityServer.Data.Migrations.IdentityServer.Configuratio
                 {
                     table.PrimaryKey("PK_IdentityResourceProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IdentityResourceProperties_IdentityResources_IdentityResourceId",
-                        column: x => x.IdentityResourceId,
-                        principalTable: "IdentityResources",
-                        principalColumn: "Id",
+                        "FK_IdentityResourceProperties_IdentityResources_IdentityResourceId",
+                        x => x.IdentityResourceId,
+                        "IdentityResources",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiResourceClaims_ApiResourceId",
-                table: "ApiResourceClaims",
-                column: "ApiResourceId");
+                "IX_ApiResourceClaims_ApiResourceId",
+                "ApiResourceClaims",
+                "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiResourceProperties_ApiResourceId",
-                table: "ApiResourceProperties",
-                column: "ApiResourceId");
+                "IX_ApiResourceProperties_ApiResourceId",
+                "ApiResourceProperties",
+                "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiResources_Name",
-                table: "ApiResources",
-                column: "Name",
+                "IX_ApiResources_Name",
+                "ApiResources",
+                "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiResourceScopes_ApiResourceId",
-                table: "ApiResourceScopes",
-                column: "ApiResourceId");
+                "IX_ApiResourceScopes_ApiResourceId",
+                "ApiResourceScopes",
+                "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiResourceSecrets_ApiResourceId",
-                table: "ApiResourceSecrets",
-                column: "ApiResourceId");
+                "IX_ApiResourceSecrets_ApiResourceId",
+                "ApiResourceSecrets",
+                "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiScopeClaims_ScopeId",
-                table: "ApiScopeClaims",
-                column: "ScopeId");
+                "IX_ApiScopeClaims_ScopeId",
+                "ApiScopeClaims",
+                "ScopeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiScopeProperties_ScopeId",
-                table: "ApiScopeProperties",
-                column: "ScopeId");
+                "IX_ApiScopeProperties_ScopeId",
+                "ApiScopeProperties",
+                "ScopeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiScopes_Name",
-                table: "ApiScopes",
-                column: "Name",
+                "IX_ApiScopes_Name",
+                "ApiScopes",
+                "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientClaims_ClientId",
-                table: "ClientClaims",
-                column: "ClientId");
+                "IX_ClientClaims_ClientId",
+                "ClientClaims",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientCorsOrigins_ClientId",
-                table: "ClientCorsOrigins",
-                column: "ClientId");
+                "IX_ClientCorsOrigins_ClientId",
+                "ClientCorsOrigins",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientGrantTypes_ClientId",
-                table: "ClientGrantTypes",
-                column: "ClientId");
+                "IX_ClientGrantTypes_ClientId",
+                "ClientGrantTypes",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientIdPRestrictions_ClientId",
-                table: "ClientIdPRestrictions",
-                column: "ClientId");
+                "IX_ClientIdPRestrictions_ClientId",
+                "ClientIdPRestrictions",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientPostLogoutRedirectUris_ClientId",
-                table: "ClientPostLogoutRedirectUris",
-                column: "ClientId");
+                "IX_ClientPostLogoutRedirectUris_ClientId",
+                "ClientPostLogoutRedirectUris",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientProperties_ClientId",
-                table: "ClientProperties",
-                column: "ClientId");
+                "IX_ClientProperties_ClientId",
+                "ClientProperties",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientRedirectUris_ClientId",
-                table: "ClientRedirectUris",
-                column: "ClientId");
+                "IX_ClientRedirectUris_ClientId",
+                "ClientRedirectUris",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clients_ClientId",
-                table: "Clients",
-                column: "ClientId",
+                "IX_Clients_ClientId",
+                "Clients",
+                "ClientId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientScopes_ClientId",
-                table: "ClientScopes",
-                column: "ClientId");
+                "IX_ClientScopes_ClientId",
+                "ClientScopes",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientSecrets_ClientId",
-                table: "ClientSecrets",
-                column: "ClientId");
+                "IX_ClientSecrets_ClientId",
+                "ClientSecrets",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityResourceClaims_IdentityResourceId",
-                table: "IdentityResourceClaims",
-                column: "IdentityResourceId");
+                "IX_IdentityResourceClaims_IdentityResourceId",
+                "IdentityResourceClaims",
+                "IdentityResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityResourceProperties_IdentityResourceId",
-                table: "IdentityResourceProperties",
-                column: "IdentityResourceId");
+                "IX_IdentityResourceProperties_IdentityResourceId",
+                "IdentityResourceProperties",
+                "IdentityResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityResources_Name",
-                table: "IdentityResources",
-                column: "Name",
+                "IX_IdentityResources_Name",
+                "IdentityResources",
+                "Name",
                 unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ApiResourceClaims");
+                "ApiResourceClaims");
 
             migrationBuilder.DropTable(
-                name: "ApiResourceProperties");
+                "ApiResourceProperties");
 
             migrationBuilder.DropTable(
-                name: "ApiResourceScopes");
+                "ApiResourceScopes");
 
             migrationBuilder.DropTable(
-                name: "ApiResourceSecrets");
+                "ApiResourceSecrets");
 
             migrationBuilder.DropTable(
-                name: "ApiScopeClaims");
+                "ApiScopeClaims");
 
             migrationBuilder.DropTable(
-                name: "ApiScopeProperties");
+                "ApiScopeProperties");
 
             migrationBuilder.DropTable(
-                name: "ClientClaims");
+                "ClientClaims");
 
             migrationBuilder.DropTable(
-                name: "ClientCorsOrigins");
+                "ClientCorsOrigins");
 
             migrationBuilder.DropTable(
-                name: "ClientGrantTypes");
+                "ClientGrantTypes");
 
             migrationBuilder.DropTable(
-                name: "ClientIdPRestrictions");
+                "ClientIdPRestrictions");
 
             migrationBuilder.DropTable(
-                name: "ClientPostLogoutRedirectUris");
+                "ClientPostLogoutRedirectUris");
 
             migrationBuilder.DropTable(
-                name: "ClientProperties");
+                "ClientProperties");
 
             migrationBuilder.DropTable(
-                name: "ClientRedirectUris");
+                "ClientRedirectUris");
 
             migrationBuilder.DropTable(
-                name: "ClientScopes");
+                "ClientScopes");
 
             migrationBuilder.DropTable(
-                name: "ClientSecrets");
+                "ClientSecrets");
 
             migrationBuilder.DropTable(
-                name: "IdentityResourceClaims");
+                "IdentityResourceClaims");
 
             migrationBuilder.DropTable(
-                name: "IdentityResourceProperties");
+                "IdentityResourceProperties");
 
             migrationBuilder.DropTable(
-                name: "ApiResources");
+                "ApiResources");
 
             migrationBuilder.DropTable(
-                name: "ApiScopes");
+                "ApiScopes");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                "Clients");
 
             migrationBuilder.DropTable(
-                name: "IdentityResources");
+                "IdentityResources");
         }
     }
 }

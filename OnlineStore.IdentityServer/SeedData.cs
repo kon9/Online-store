@@ -9,10 +9,10 @@ using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using OnlineStore.Library.UserManagementService.Models;
-using OnlineStore.Library.Data;
 using OnlineStore.Library.Common.Models;
+using OnlineStore.Library.Data;
+using OnlineStore.Library.UserManagementService.Models;
+using Serilog;
 
 namespace OnlineStore
 {
@@ -23,7 +23,7 @@ namespace OnlineStore
             var services = new ServiceCollection();
             services.AddLogging();
             services.AddDbContext<UsersDbContext>(options =>
-               options.UseSqlServer(connectionString));
+                options.UseSqlServer(connectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UsersDbContext>()
@@ -44,10 +44,10 @@ namespace OnlineStore
                         {
                             UserName = "alice",
                             Email = "AliceSmith@email.com",
-                            FirstName= "Test",
-                            LastName= "TestLastName",
+                            FirstName = "Test",
+                            LastName = "TestLastName",
                             EmailConfirmed = true,
-                            DefaultAddress = new Address()
+                            DefaultAddress = new Address
                             {
                                 City = "Novosibirsk",
                                 Country = "China",
@@ -55,7 +55,7 @@ namespace OnlineStore
                                 AddressLine1 = "Address",
                                 AddressLine2 = "AddresLineTwo"
                             },
-                            DeliveryAddress = new Address()
+                            DeliveryAddress = new Address
                             {
                                 City = "Novosibirsk",
                                 Country = "China",
@@ -65,21 +65,16 @@ namespace OnlineStore
                             }
                         };
                         var result = userMgr.CreateAsync(alice, "Pass123$").Result;
-                        if (!result.Succeeded)
-                        {
-                            throw new Exception(result.Errors.First().Description);
-                        }
+                        if (!result.Succeeded) throw new Exception(result.Errors.First().Description);
 
-                        result = userMgr.AddClaimsAsync(alice, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, "Alice Smith"),
+                        result = userMgr.AddClaimsAsync(alice, new[]
+                        {
+                            new(JwtClaimTypes.Name, "Alice Smith"),
                             new Claim(JwtClaimTypes.GivenName, "Alice"),
                             new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                            new Claim(JwtClaimTypes.WebSite, "http://alice.com")
                         }).Result;
-                        if (!result.Succeeded)
-                        {
-                            throw new Exception(result.Errors.First().Description);
-                        }
+                        if (!result.Succeeded) throw new Exception(result.Errors.First().Description);
                         Log.Debug("alice created");
                     }
                     else

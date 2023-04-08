@@ -2,9 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System.Collections.Generic;
 using IdentityServer4;
 using IdentityServer4.Models;
-using System.Collections.Generic;
 using OnlineStore.Library.Constants;
 
 namespace OnlineStore
@@ -12,23 +12,23 @@ namespace OnlineStore
     public static class Config
     {
         public static IEnumerable<IdentityResource> IdentityResources =>
-                   new IdentityResource[]
-                   {
-                        new IdentityResources.OpenId(),
-                        new IdentityResources.Profile(),
-                   };
+            new IdentityResource[]
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
+            };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[]
+            new[]
             {
-                new ApiScope(IdConstants.ApiScope),
-                new ApiScope(IdConstants.WebScope),
+                new(IdConstants.ApiScope),
+                new ApiScope(IdConstants.WebScope)
             };
 
         public static IEnumerable<Client> Clients =>
-            new Client[]
+            new[]
             {
-                new Client
+                new()
                 {
                     ClientId = "test.client",
                     ClientName = "Test client",
@@ -36,7 +36,7 @@ namespace OnlineStore
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
-                    AllowedScopes = 
+                    AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
@@ -50,7 +50,7 @@ namespace OnlineStore
                     ClientName = "External Client",
 
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    RequireClientSecret= false,
+                    RequireClientSecret = false,
 
                     AllowedScopes =
                     {
@@ -58,9 +58,7 @@ namespace OnlineStore
                         IdentityServerConstants.StandardScopes.Profile,
                         IdConstants.WebScope
                     }
-                },
-
-
+                }
             };
     }
 }

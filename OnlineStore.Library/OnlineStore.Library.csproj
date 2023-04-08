@@ -15,4 +15,11 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Clients\IdentityServer\" />
+    <Folder Include="Clients\UserManagementService\" />
+    <Folder Include="IdentityServer\" />
+    <Folder Include="UserManagementService\Responses\" />
+  </ItemGroup>
+
 </Project>

@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.UserManagementS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{519164F5-AE78-4F3F-90C6-1101A944DEBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Library", "OnlineStore.Library\OnlineStore.Library.csproj", "{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Library", "OnlineStore.Library\OnlineStore.Library.csproj", "{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{4213C9B4-F036-4D2F-A28C-766480C4ECB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{7E5E1766-0399-497C-8569-0FDDB11223CE} = {27471252-0969-4C83-8C98-7651AA9B01E8}
 		{70275133-11A9-4B0E-90E4-78531E20F4AA} = {70E655CE-EC95-4586-9083-8FB5C2C02E36}
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5} = {519164F5-AE78-4F3F-90C6-1101A944DEBF}
+		{4213C9B4-F036-4D2F-A28C-766480C4ECB1} = {27471252-0969-4C83-8C98-7651AA9B01E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B478045-E435-49C2-BC88-7C56D6001722}

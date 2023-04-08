@@ -9,7 +9,9 @@ namespace OnlineStore.UserManagementService.Controllers
     public class HealthCheckController : ControllerBase
     {
         [HttpGet]
-        public string HealthCheck() => "Service is online";
-
+        public string HealthCheck()
+        {
+            return "Service is online";
+        }
     }
 }

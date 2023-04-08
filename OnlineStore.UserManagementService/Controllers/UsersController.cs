@@ -1,21 +1,22 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
+using OnlineStore.Library.Constants;
 using OnlineStore.Library.UserManagementService.Models;
 using OnlineStore.Library.UserManagementService.Requests;
-using OnlineStore.Library.Constants;
 
 namespace OnlineStore.UserManagementService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(AuthenticationSchemes  = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+
         public UsersController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
@@ -24,7 +25,7 @@ namespace OnlineStore.UserManagementService.Controllers
         [HttpPost(RepoActions.Add)]
         public Task<IdentityResult> Add(CreateUserRequest request)
         {
-            var result = _userManager.CreateAsync(request.User,request.Password);
+            var result = _userManager.CreateAsync(request.User, request.Password);
             return result;
         }
 
@@ -32,15 +33,15 @@ namespace OnlineStore.UserManagementService.Controllers
         public async Task<IdentityResult> Update(ApplicationUser user)
         {
             var userToBeUpdated = await _userManager.FindByNameAsync(user.UserName);
-            if (userToBeUpdated == null) 
-                return IdentityResult.Failed(new IdentityError() { Description= $"{user.UserName} not found." });
+            if (userToBeUpdated == null)
+                return IdentityResult.Failed(new IdentityError { Description = $"{user.UserName} not found." });
 
             userToBeUpdated.DefaultAddress = user.DefaultAddress;
-            userToBeUpdated.DeliveryAddress= user.DeliveryAddress;
-            userToBeUpdated.FirstName= user.FirstName;
-            userToBeUpdated.LastName= user.LastName;
-            userToBeUpdated.PhoneNumber= user.PhoneNumber;
-            userToBeUpdated.Email= user.Email;
+            userToBeUpdated.DeliveryAddress = user.DeliveryAddress;
+            userToBeUpdated.FirstName = user.FirstName;
+            userToBeUpdated.LastName = user.LastName;
+            userToBeUpdated.PhoneNumber = user.PhoneNumber;
+            userToBeUpdated.Email = user.Email;
 
             var result = await _userManager.UpdateAsync(userToBeUpdated);
             return result;
@@ -61,20 +62,20 @@ namespace OnlineStore.UserManagementService.Controllers
         }
 
         [HttpGet(RepoActions.GetAll)]
-        public IEnumerable<ApplicationUser> Get() 
+        public IEnumerable<ApplicationUser> Get()
         {
             var result = _userManager.Users.AsEnumerable();
-            return result; 
+            return result;
         }
 
         [HttpPost(UsersControllerRoutes.ChangePassword)]
         public async Task<IdentityResult> ChangePassword(UserPasswordChangeRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if(user== null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"{request.UserName} not found." });
-            
-            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword,request.NewPassword);
+            if (user == null)
+                return IdentityResult.Failed(new IdentityError { Description = $"{request.UserName} not found." });
+
+            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
             return result;
         }
 
@@ -82,8 +83,8 @@ namespace OnlineStore.UserManagementService.Controllers
         public async Task<IdentityResult> AddToRole(AddRemoveRoleRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null) 
-                return IdentityResult.Failed(new IdentityError(){ Description = $"{request.UserName} not found."});
+            if (user == null)
+                return IdentityResult.Failed(new IdentityError { Description = $"{request.UserName} not found." });
             var result = await _userManager.AddToRoleAsync(user, request.RoleName);
             return result;
         }
@@ -93,7 +94,8 @@ namespace OnlineStore.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {request.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError
+                    { Description = $"User {request.UserName} was not found." });
 
             var result = await _userManager.AddToRolesAsync(user, request.RoleNames);
             return result;
@@ -104,7 +106,8 @@ namespace OnlineStore.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {request.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError
+                    { Description = $"User {request.UserName} was not found." });
 
             var result = await _userManager.RemoveFromRoleAsync(user, request.RoleName);
             return result;
@@ -115,7 +118,8 @@ namespace OnlineStore.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {request.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError
+                    { Description = $"User {request.UserName} was not found." });
 
             var result = await _userManager.RemoveFromRolesAsync(user, request.RoleNames);
             return result;

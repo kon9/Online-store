@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,8 +28,6 @@ namespace OnlineStore.Library.Common.Models
         [Column(TypeName = "nvarchar(256)")]
         public string AddressLine1 { get; set; }
 
-        [Column(TypeName = "nvarchar(256)")]
-        public string AddressLine2 { get; set;}
-
+        [Column(TypeName = "nvarchar(256)")] public string AddressLine2 { get; set; }
     }
 }
