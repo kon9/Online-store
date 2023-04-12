@@ -34,7 +34,7 @@ namespace ConsoleTestApp
                         (configuration.GetSection(IdentityServerApiOptions.SectionName));
 
                     services.Configure<ServiceAddressOptions>
-                        (configuration.GetSection(ServiceAddressOptions.ServiceAddress));
+                        (configuration.GetSection(ServiceAddressOptions.SectionName));
                 })
                 .ConfigureLogging(logging =>
                 {
