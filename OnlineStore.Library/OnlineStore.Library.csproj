@@ -19,6 +19,7 @@
 		<Folder Include="ArticleService\Models\" />
 		<Folder Include="Clients\IdentityServer\" />
 		<Folder Include="Clients\ArticlesService\" />
+		<Folder Include="Clients\AspIdentity\" />
 		<Folder Include="Clients\OrdersService\" />
 		<Folder Include="Clients\UserManagementService\" />
 		<Folder Include="Common\Interfaces\" />

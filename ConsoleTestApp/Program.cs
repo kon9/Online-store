@@ -2,14 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using OnlineStore.Library.Clients.IdentityServer;
+using OnlineStore.Library.Clients.AspIdentity;
 using OnlineStore.Library.Clients.UserManagementService;
 using OnlineStore.Library.Options;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ConsoleTestApp
+namespace OnlineStore.ConsoleTestApp
 {
     internal class Program
     {
@@ -18,7 +18,7 @@ namespace ConsoleTestApp
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHttpClient<IdentityServerClient>();
+                    services.AddHttpClient<AspIdentityClient>();
                     services.AddHttpClient<UsersClient>();
                     services.AddHttpClient<RolesClient>();
 
@@ -30,8 +30,8 @@ namespace ConsoleTestApp
 
                     var configuration = configurationBuilder.Build();
 
-                    services.Configure<IdentityServerApiOptions>
-                        (configuration.GetSection(IdentityServerApiOptions.SectionName));
+                    services.Configure<AspIdentityApiOptions>
+                        (configuration.GetSection(AspIdentityApiOptions.SectionName));
 
                     services.Configure<ServiceAddressOptions>
                         (configuration.GetSection(ServiceAddressOptions.SectionName));
@@ -53,9 +53,8 @@ namespace ConsoleTestApp
                 {
                     var service = services.GetRequiredService<AuthenticationServiceTest>();
 
-                    var rolesResult = await service.RunRolesClientTest(args);
-                    var usersResult = await service.RunUserClientTest(args);
-
+                    var usersResult = await service.RunUserClientTest("testUser");
+                    var rolesResult = await service.RunRolesClientTest("testRole");
 
                     Console.WriteLine($"Roles Client: {rolesResult}");
                     Console.WriteLine($"Users Client: {usersResult}");

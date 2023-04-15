@@ -1,5 +1,3 @@
-using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OnlineStore.Library.ArticleService.Models;
@@ -7,7 +5,6 @@ using OnlineStore.Library.ArticleService.Repos;
 using OnlineStore.Library.Common.Interfaces;
 using OnlineStore.Library.Constants;
 using OnlineStore.Library.Data;
-using OnlineStore.Library.UserManagementService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +23,7 @@ builder.Services.AddDbContext<OrdersDbContext>(options =>
 builder.Services.AddTransient<IRepo<Article>, ArticlesRepo>();
 builder.Services.AddTransient<IRepo<PriceList>, PriceListRepo>();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+/*builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
 
@@ -46,7 +43,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("scope", IdConstants.ApiScope);
     });
-});
+});*/
 
 var app = builder.Build();
 

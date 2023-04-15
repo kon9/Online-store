@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Library.Constants;
 using OnlineStore.Library.UserManagementService.Models;
 using OnlineStore.Library.UserManagementService.Requests;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineStore.UserManagementService.Controllers
 {
@@ -95,7 +95,7 @@ namespace OnlineStore.UserManagementService.Controllers
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
                 return IdentityResult.Failed(new IdentityError
-                    { Description = $"User {request.UserName} was not found." });
+                { Description = $"User {request.UserName} was not found." });
 
             var result = await _userManager.AddToRolesAsync(user, request.RoleNames);
             return result;
@@ -107,7 +107,7 @@ namespace OnlineStore.UserManagementService.Controllers
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
                 return IdentityResult.Failed(new IdentityError
-                    { Description = $"User {request.UserName} was not found." });
+                { Description = $"User {request.UserName} was not found." });
 
             var result = await _userManager.RemoveFromRoleAsync(user, request.RoleName);
             return result;
@@ -119,7 +119,7 @@ namespace OnlineStore.UserManagementService.Controllers
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
                 return IdentityResult.Failed(new IdentityError
-                    { Description = $"User {request.UserName} was not found." });
+                { Description = $"User {request.UserName} was not found." });
 
             var result = await _userManager.RemoveFromRolesAsync(user, request.RoleNames);
             return result;

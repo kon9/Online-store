@@ -31,16 +31,14 @@ namespace OnlineStore.Library.Clients.IdentityServer
             var content = new FormUrlEncodedContent(keyValues);
             var response = await HttpClient.PostAsync("/connect/token", content);
             var responseContent = await response.Content.ReadAsStringAsync();
-
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 Console.WriteLine($"Error: {response.StatusCode}");
                 Console.WriteLine($"Content: {responseContent}");
                 throw new InvalidOperationException("An error occurred while getting the API token.");
             }
 
-            var token = JsonConvert.DeserializeObject<Token>(responseContent);
+            var token = JsonConvert.DeserializeObject<Token>(responseContent);//Bug here - token values is null.To fix change the property names in the Token class to match the JSON property names
             return token;
         }
     }

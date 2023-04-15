@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using OnlineStore.Library.Common.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineStore.Library.UserManagementService.Models
 {
