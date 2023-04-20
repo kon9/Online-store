@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Library.ArticleService.Models;
 using OnlineStore.Library.Common.Interfaces;
 using OnlineStore.Library.Common.Repos;
@@ -7,7 +8,7 @@ namespace OnlineStore.OrdersService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class OrderedArticlesController : BaseControllerRepo<OrderedArticle>
     {
 

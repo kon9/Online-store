@@ -3,7 +3,7 @@ using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using Moq;
 using OnlineStore.Library.ArticleService.Models;
-using OnlineStore.Library.Clients.IdentityServer;
+using OnlineStore.Library.Clients.AspIdentity;
 using OnlineStore.Library.Clients.OrdersService;
 using OnlineStore.Library.Options;
 using OnlineStore.Library.OrdersService.Models;
@@ -15,32 +15,36 @@ namespace OnlineStore.OrdersService.ApiTests;
 public class OrdersRepoClientTests : IAsyncLifetime
 {
     private readonly Fixture _fixture = new();
-    private IdentityServerClient _identityServerClient;
-    private OrdersClient _systemUnderTests;
+    private AspIdentityClient _identityServerClient;
+    private OrdersClient _oredersClient;
 
-    public OrdersRepoClientTests()
+    public async Task InitializeAsync()
+    {
+        ConfigureFixture();
+        InitializeClients();
+        await SetTokenForClients();
+    }
+
+    private void ConfigureFixture()
     {
         _fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList().ForEach(b => _fixture.Behaviors.Remove(b));
         _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
     }
 
-    public async Task InitializeAsync()
+    private void InitializeClients()
     {
         var serviceAddressOptionsMock = new Mock<IOptions<ServiceAddressOptions>>();
         serviceAddressOptionsMock.Setup(m => m.Value).Returns(new ServiceAddressOptions
-        { OrdersService = "https://localhost:7103", IdentityServer = "https://localhost:5001" });
+        { OrdersService = "https://localhost:7103", AspIdentityServer = "https://localhost:7202" });
+        _oredersClient = new OrdersClient(new HttpClient(), serviceAddressOptionsMock.Object);
+        _identityServerClient = new AspIdentityClient(new HttpClient(), serviceAddressOptionsMock.Object);
+    }
 
-        _systemUnderTests = new OrdersClient(new HttpClient(), serviceAddressOptionsMock.Object);
-        _identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
-
-        var identityOptions = new IdentityServerApiOptions
-        {
-            ClientId = "test.client",
-            ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A"
-        };
-
+    private async Task SetTokenForClients()
+    {
+        var identityOptions = new AspIdentityApiOptions();
         var token = await _identityServerClient.GetApiToken(identityOptions);
-        _systemUnderTests.HttpClient.SetBearerToken(token.AccessToken);
+        _oredersClient.HttpClient.SetBearerToken(token.AccessToken);
     }
 
     [Fact]
@@ -50,16 +54,16 @@ public class OrdersRepoClientTests : IAsyncLifetime
             .With(o => o.Articles, _fixture.CreateMany<OrderedArticle>().ToList())
             .Create();
 
-        var addResponse = await _systemUnderTests.Add(expected);
+        var addResponse = await _oredersClient.Add(expected);
         Assert.True(addResponse.IsSuccessful);
 
-        var getOneResponse = await _systemUnderTests.GetOne(addResponse.Payload);
+        var getOneResponse = await _oredersClient.GetOne(addResponse.Payload);
         Assert.True(getOneResponse.IsSuccessful);
         var actual = getOneResponse.Payload;
 
         AssertObjectsAreEqual(expected, actual);
 
-        var removeResponse = await _systemUnderTests.Remove(addResponse.Payload);
+        var removeResponse = await _oredersClient.Remove(addResponse.Payload);
         Assert.True(removeResponse.IsSuccessful);
     }
 
@@ -76,10 +80,10 @@ public class OrdersRepoClientTests : IAsyncLifetime
 
         var ordersToAdd = new[] { expected1, expected2 };
 
-        var addRangeResponse = await _systemUnderTests.AddRange(ordersToAdd);
+        var addRangeResponse = await _oredersClient.AddRange(ordersToAdd);
         Assert.True(addRangeResponse.IsSuccessful);
 
-        var getAllResponse = await _systemUnderTests.GetAll();
+        var getAllResponse = await _oredersClient.GetAll();
         Assert.True(getAllResponse.IsSuccessful);
 
         var addedOrders = getAllResponse.Payload;
@@ -91,7 +95,7 @@ public class OrdersRepoClientTests : IAsyncLifetime
             AssertObjectsAreEqual(expectedOrder, actualOrder);
         }
 
-        var removeRangeResponse = await _systemUnderTests.RemoveRange(addRangeResponse.Payload);
+        var removeRangeResponse = await _oredersClient.RemoveRange(addRangeResponse.Payload);
         Assert.True(removeRangeResponse.IsSuccessful);
     }
 
@@ -104,7 +108,7 @@ public class OrdersRepoClientTests : IAsyncLifetime
             .With(o => o.Articles, orderedArticles)
             .Create();
 
-        var addResponse = await _systemUnderTests.Add(expected);
+        var addResponse = await _oredersClient.Add(expected);
         Assert.True(addResponse.IsSuccessful);
 
         orderedArticles.ForEach(oa => oa.Name = _fixture.Create<string>());
@@ -113,13 +117,13 @@ public class OrdersRepoClientTests : IAsyncLifetime
         expected.AddressId = _fixture.Create<Guid>();
         expected.Articles = orderedArticles;
 
-        var updateResponse = await _systemUnderTests.Update(expected);
+        var updateResponse = await _oredersClient.Update(expected);
         Assert.True(updateResponse.IsSuccessful);
         var actual = updateResponse.Payload;
 
         AssertObjectsAreEqual(expected, actual);
 
-        var removeResponse = await _systemUnderTests.Remove(addResponse.Payload);
+        var removeResponse = await _oredersClient.Remove(addResponse.Payload);
         Assert.True(removeResponse.IsSuccessful);
     }
 

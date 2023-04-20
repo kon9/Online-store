@@ -6,7 +6,7 @@ using System.Net.Http;
 
 namespace OnlineStore.Library.Clients.OrdersService;
 
-public class OrderedArticlesClient : BaseClientRepo<OrderedArticle>
+public class OrderedArticlesClient : RepoClient<OrderedArticle>
 {
     public OrderedArticlesClient(HttpClient client, IOptions<ServiceAddressOptions> options) : base(client, options)
     { }
