@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace OnlineStore.Library.Clients;
 
 
-public abstract class BaseClientRepo<T> : IBaseClientRepo, IHttpClientContainer
+public abstract class RepoClient<T> : IRepoClient<T>, IHttpClientContainer
 {
-    protected BaseClientRepo(HttpClient client, IOptions<ServiceAddressOptions> options)
+    protected RepoClient(HttpClient client, IOptions<ServiceAddressOptions> options)
     {
         HttpClient = client;
         InitializeClient(options);

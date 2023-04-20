@@ -6,7 +6,7 @@ using System.Net.Http;
 
 namespace OnlineStore.Library.Clients.ArticlesService;
 
-public class PriceListsClient : BaseClientRepo<PriceList>
+public class PriceListsClient : RepoClient<PriceList>
 {
     public PriceListsClient(HttpClient client, IOptions<ServiceAddressOptions> options) : base(client, options)
     { }

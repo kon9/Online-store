@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineStore.Library.ArticleService.Models;
 using OnlineStore.Library.Common.Interfaces;
@@ -6,6 +9,8 @@ using OnlineStore.Library.Constants;
 using OnlineStore.Library.Data;
 using OnlineStore.Library.OrdersService.Models;
 using OnlineStore.Library.OrdersService.Repos;
+using OnlineStore.Library.UserManagementService.Models;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,17 +34,23 @@ builder.Services.AddDbContext<UsersDbContext>(options =>
 
 builder.Services.AddTransient<IRepo<Order>, OrdersRepo>();
 builder.Services.AddTransient<IRepo<OrderedArticle>, OrderedArticlesRepo>();
-
-/*builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddAuthentication(
-        IdentityServerAuthenticationDefaults.AuthenticationScheme)
-    .AddIdentityServerAuthentication(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:5001";
-        options.ApiName = "https://localhost:5001/resources";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
         options.RequireHttpsMetadata = false;
     });
 
@@ -50,7 +61,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("scope", IdConstants.ApiScope);
     });
-});*/
+});
 
 
 var app = builder.Build();
@@ -72,6 +83,6 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers();
+    endpoints.MapControllers().RequireAuthorization("ApiScope");
 });
 app.Run();

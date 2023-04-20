@@ -21,8 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{519164F5-A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.Library", "OnlineStore.Library\OnlineStore.Library.csproj", "{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.ConsoleTestApp", "ConsoleTestApp\OnlineStore.ConsoleTestApp.csproj", "{4213C9B4-F036-4D2F-A28C-766480C4ECB1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.ArticlesService", "OnlineStore.ArticleService\OnlineStore.ArticlesService.csproj", "{6E238489-EF80-4B02-9499-A5B7D15B5620}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.OrdersService", "OnlineStore.OrdersService\OnlineStore.OrdersService.csproj", "{C8EA3E6D-908C-4BA2-861A-3B5A9CEA14CA}"
@@ -34,6 +32,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.ArticlesService.ApiTests", "OnlineStore.ArticlesService.ApiTests\OnlineStore.ArticlesService.ApiTests.csproj", "{4D97FD5D-9B22-4C87-8476-1ADE7CFDBB18}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.AspIdentityServer", "OnlineStore.AspIdentityServer\OnlineStore.AspIdentityServer.csproj", "{DFE5D0E8-90FE-4378-AE63-FC8D25701813}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore.ConsoleTestApp", "OnlineStore.ConsoleTestApp\OnlineStore.ConsoleTestApp.csproj", "{89F2D65B-7CA8-48E1-9061-3B4EFBB2B7A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,6 @@ Global
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4213C9B4-F036-4D2F-A28C-766480C4ECB1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E238489-EF80-4B02-9499-A5B7D15B5620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E238489-EF80-4B02-9499-A5B7D15B5620}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E238489-EF80-4B02-9499-A5B7D15B5620}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,6 +69,10 @@ Global
 		{DFE5D0E8-90FE-4378-AE63-FC8D25701813}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFE5D0E8-90FE-4378-AE63-FC8D25701813}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFE5D0E8-90FE-4378-AE63-FC8D25701813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F2D65B-7CA8-48E1-9061-3B4EFBB2B7A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F2D65B-7CA8-48E1-9061-3B4EFBB2B7A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F2D65B-7CA8-48E1-9061-3B4EFBB2B7A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F2D65B-7CA8-48E1-9061-3B4EFBB2B7A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,12 +80,12 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{70275133-11A9-4B0E-90E4-78531E20F4AA} = {70E655CE-EC95-4586-9083-8FB5C2C02E36}
 		{D4FD3BA5-3BAD-411C-886B-8417763CE8B5} = {519164F5-AE78-4F3F-90C6-1101A944DEBF}
-		{4213C9B4-F036-4D2F-A28C-766480C4ECB1} = {27471252-0969-4C83-8C98-7651AA9B01E8}
 		{6E238489-EF80-4B02-9499-A5B7D15B5620} = {70E655CE-EC95-4586-9083-8FB5C2C02E36}
 		{C8EA3E6D-908C-4BA2-861A-3B5A9CEA14CA} = {70E655CE-EC95-4586-9083-8FB5C2C02E36}
 		{CF6A90CF-09E4-4A0D-AC43-1FB0A490C2D8} = {890121DD-630A-4378-973B-06D6EF7BECCF}
 		{4D97FD5D-9B22-4C87-8476-1ADE7CFDBB18} = {890121DD-630A-4378-973B-06D6EF7BECCF}
 		{DFE5D0E8-90FE-4378-AE63-FC8D25701813} = {27471252-0969-4C83-8C98-7651AA9B01E8}
+		{89F2D65B-7CA8-48E1-9061-3B4EFBB2B7A6} = {27471252-0969-4C83-8C98-7651AA9B01E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B478045-E435-49C2-BC88-7C56D6001722}
