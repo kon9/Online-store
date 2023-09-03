@@ -47,4 +47,10 @@ The architecture prioritizes clean design and modularity, achieved primarily thr
 - JWT-based authentication for ensuring secure user sessions.
 - Authorization strategies founded on user scopes.
 
+# ToDo
+- Add docker
+- Fix Authentication
+- Tests
+- Logger
+
 
